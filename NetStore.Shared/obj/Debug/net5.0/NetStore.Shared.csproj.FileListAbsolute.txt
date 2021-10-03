@@ -1,0 +1,13 @@
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.GlobalUsings.g.cs
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.csproj.AssemblyReference.cache
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.AssemblyInfoInputs.cache
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.AssemblyInfo.cs
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.csproj.CoreCompileInputs.cache
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\bin\Debug\net5.0\NetStore.Shared.deps.json
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\bin\Debug\net5.0\NetStore.Shared.dll
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\bin\Debug\net5.0\ref\NetStore.Shared.dll
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\bin\Debug\net5.0\NetStore.Shared.pdb
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.dll
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\ref\NetStore.Shared.dll
+C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.pdb

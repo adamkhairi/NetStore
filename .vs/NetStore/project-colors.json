@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4ce893a1-0bc9-46e3-bb62-068acd7093f9": {
+      "ProjectGuid": "4ce893a1-0bc9-46e3-bb62-068acd7093f9",
+      "DisplayName": "NetStore.Api",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
