@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetStore.Api.Services.Auth;
 using NetStore.Shared.Dto;
@@ -19,9 +20,15 @@ namespace NetStore.Api.Controllers.v1
 
 
         #region Registration Method (Create Token and register user)
-
-        [HttpPost("Register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
+        /// <summary>
+        /// Add New User and Return Token
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             //Check the Model State(Annotaions)
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -41,9 +48,15 @@ namespace NetStore.Api.Controllers.v1
 
 
         #region Login Method (Get Token)
-
-        [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync([FromBody] TokenRequestModel model)
+        /// <summary>
+        /// Return Login Token
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns type="AuthModel"></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login([FromBody] TokenRequestModel model)
         {
             //Check the Model State(Annotaions)
             if (!ModelState.IsValid) return BadRequest(ModelState);

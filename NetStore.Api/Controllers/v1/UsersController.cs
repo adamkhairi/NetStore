@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetStore.Api.Services.Auth;
 using NetStore.Api.Services.Users;
@@ -20,6 +21,14 @@ namespace NetStore.Api.Controllers.v1
             _userService = userService;
         }
 
+        /// <summary>
+        /// Get All Users
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
         // [Authorize]
         public async Task<IActionResult> GetUsers()
@@ -30,9 +39,17 @@ namespace NetStore.Api.Controllers.v1
 
             return Ok(users);
         }
+        
 
-
-        [HttpGet("Detail")]
+        /// <summary>
+        /// Get User By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetUser(string id)
         {
             // if (ModelState.IsValid) return BadRequest(ModelState);
@@ -44,9 +61,16 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
-
+        /// <summary>
+        /// Add New User
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]
-        [HttpPost("Add")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> AddUser([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -63,12 +87,20 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
-
+        /// <summary>
+        /// Edit User 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]
-        [HttpPut("Edit")]
-        public async Task<IActionResult> EditUser(string userId, EditUserModel user)
+        [HttpPut("[action]")]
+        public async Task<IActionResult> EditUser(string id, EditUserModel user)
         {
-            if (!ModelState.IsValid || userId != user.Id) return BadRequest(ModelState);
+            if (!ModelState.IsValid || id != user.Id) return BadRequest(ModelState);
 
 
             var result = await _userService.Put(user);
@@ -77,9 +109,16 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
-
+        /// <summary>
+        /// Delete User
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize] 
-        [HttpDelete("Delete")]
+        [HttpDelete("[action]")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             if (!await _userService.Delete(id)) return BadRequest(new {Message = "Couldn't Delete User !"});
@@ -90,9 +129,16 @@ namespace NetStore.Api.Controllers.v1
 
         #region Get UserList and RoleList
 
+       /// <summary>
+       /// Return List of Users and Roles
+       /// </summary>
+       /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]
-        [HttpGet("Roles")]
-        public async Task<IActionResult> UsersAndRolesAsync()
+        [HttpGet("[action]")]
+        public async Task<IActionResult> UsersAndRoles()
         {
             var roleList = await _userService.GetRolesList();
             var usersList = await _userService.GetUsersList();
@@ -107,9 +153,17 @@ namespace NetStore.Api.Controllers.v1
 
         #region Add User To Role Method
 
+        /// <summary>
+        /// Add User To Role (User Id, Role Name)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]  
-        [HttpPost("ManageRole")]
-        public async Task<IActionResult> AddToRoleAsync([FromBody] AddRoleModel model)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> AddToRole([FromBody] AddRoleModel model)
         {
             //Check the Model State(Annotaions)
             if (!ModelState.IsValid) return BadRequest(ModelState);

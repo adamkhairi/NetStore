@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -30,6 +31,7 @@ using NetStore.Api.Services.Products;
 using NetStore.Api.Services.UriService;
 using NetStore.Api.Services.Users;
 using NetStore.Shared.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace NetStore.Api
 {
@@ -64,7 +66,7 @@ namespace NetStore.Api
             //!! _ DependencyInjection _ ===>
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
-            
+
             services.AddScoped<ICategoryServices, CategoryServices>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartItemsService, CartItemsService>();
@@ -77,7 +79,7 @@ namespace NetStore.Api
                 var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
                 return new UriService(absoluteUri);
             });
-            
+
             //AutoMapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -110,7 +112,14 @@ namespace NetStore.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "NetStore.Api", Version = "v1"});
-            });
+                var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlfile);
+                c.IncludeXmlComments(xmlPath);
+                c.CustomOperationIds(ad =>
+                {
+                    return ad.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name : null;
+                });
+            }).AddSwaggerGenNewtonsoftSupport();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -120,7 +129,11 @@ namespace NetStore.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetStore.Api v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetStore.Api v1");
+                    c.DisplayOperationId();
+                });
             }
 
             app.UseHttpsRedirection();

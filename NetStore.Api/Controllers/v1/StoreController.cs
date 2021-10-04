@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetStore.Api.Contracts;
 using NetStore.Api.Contracts.Queries;
@@ -31,9 +32,18 @@ namespace NetStore.Api.Controllers.v1
             _uriService = uriService;
         }
 
+        /// <summary>
+        /// Get All Product Apply Pagination and Search
+        /// </summary>
+        /// <param name="paginationQuery"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.GetAll)]
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] PaginationQuery paginationQuery, [FromQuery] GetAllProductsQuery query)
+        public async Task<IActionResult> GetProducts([FromQuery] PaginationQuery paginationQuery, [FromQuery] GetAllProductsQuery query)
         {
             var paginationFilter = _mapper.Map<PaginationFilter>(paginationQuery);
             var filter = _mapper.Map<GetAllProductsFilter>(query);
@@ -64,9 +74,16 @@ namespace NetStore.Api.Controllers.v1
             return Ok(paginationResponce);
         }
 
+        /// <summary>
+        /// Get Product By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.Get)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] string id)
+        public async Task<IActionResult> GetProduct([FromRoute] string id)
         {
             var result = await _products.Get(id);
             if (result == null) return BadRequest();
@@ -74,9 +91,17 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Get Products by Category Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.GetByCat)]
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> GetByCategory([FromRoute] string id)
+        public async Task<IActionResult> GetProductsByCategory([FromRoute] string id)
         {
             var result = await _products.GetByCategory(id);
             if (result == null) return BadRequest();
@@ -84,9 +109,16 @@ namespace NetStore.Api.Controllers.v1
             return Ok(new Responce<ICollection<Product>>(result));
         }
 
+        /// <summary>
+        /// Get Top Products
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.GetTopProducts)]
         [HttpGet("[action]")]
-        public async Task<IActionResult> TopProducts()
+        public async Task<IActionResult> GetTopProducts()
         {
             var result = await _products.GetTopProducts();
             if (result == null) return BadRequest();
@@ -94,10 +126,19 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
+     
+        /// <summary>
+        /// Post New Product 
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         //[Authorize(Roles = "Admin")]
         //[HttpPost(ApiRoutes.Product.Create)]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddProductDTO product)
+        public async Task<IActionResult> PostProduct([FromBody] AddProductDTO product)
         {
             if (!ModelState.IsValid) return BadRequest();
             var result = await _products.Post(product);
@@ -106,10 +147,19 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
+        /// <summary>
+        ///  Update Product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         //[Authorize(Roles = "Admin")]
         //[HttpPut(ApiRoutes.Product.Update)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] string id, [FromBody] Product product)
+        public async Task<IActionResult> PutProduct([FromRoute] string id, [FromBody] Product product)
         {
             if (!ModelState.IsValid) return BadRequest();
             var result = await _products.Put(id, product);
@@ -118,10 +168,18 @@ namespace NetStore.Api.Controllers.v1
             return Ok(result);
         }
 
+        /// <summary>
+        /// Delete Product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         //[Authorize(Roles = "Admin")]
         //[HttpDelete(ApiRoutes.Product.Delete)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] string id)
+        public async Task<IActionResult> DeleteProduct([FromRoute] string id)
         {
             var result = await _products.Delete(id);
             if (result == false) return BadRequest();
