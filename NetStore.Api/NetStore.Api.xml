@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetStore.Api</name>
+    </assembly>
+    <members>
+        <member name="M:NetStore.Api.Controllers.v1.AuthController.RegisterAsync(NetStore.Shared.Dto.RegisterModel)">
+            <summary>
+            Add New User and Return Token
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.AuthController.LoginAsync(NetStore.Shared.Dto.TokenRequestModel)">
+            <summary>
+            Return Login Token
+            </summary>
+            <param name="model"></param>
+            <returns type="AuthModel"></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CartItemsController.Get(System.String)">
+            <summary>
+             Return List of ResponceCartItem 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CartItemsController.Post(NetStore.Api.Contracts.Requests.CartItemRequest)">
+            <summary>
+            Post new CartItem
+            </summary>
+            <param name="cartItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CartItemsController.CountAsync(System.String)">
+            <summary>
+            Count CartItems by User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CartItemsController.SubTotal(System.String)">
+            <summary>
+            Count SubTotal of the CartItems By User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CartItemsController.TotalItems(System.String)">
+            <summary>
+            Count Total of the CartItems By User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CartItemsController.Delete(System.String)">
+            <summary>
+            Delete All CartItems By User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CategoriesController.Get">
+            <summary>
+            Get All Categories
+            </summary>
+            <param></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CategoriesController.Get(System.String)">
+            <summary>
+            Get Category By Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CategoriesController.Post(NetStore.Shared.Models.Category)">
+            <summary>
+            Count SubTotal of the CartItems By User
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CategoriesController.Delete(System.String)">
+            <summary>
+            Count SubTotal of the CartItems By User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.CategoriesController.Put(System.String,NetStore.Shared.Models.Category)">
+            <summary>
+            Count SubTotal of the CartItems By User
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.Get(System.String)">
+            <summary>
+            Get Order By Id returns List ResponceOrderDetailDto
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.Post(NetStore.Api.Contracts.Requests.RequestOrder)">
+            <summary>
+            Post Order (Request Order)
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.Completed">
+            <summary>
+            Get All Completed Orders 
+            </summary>
+            <param></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.Pending">
+            <summary>
+            Get All Pending Orders 
+            </summary>
+            <param></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.Count">
+            <summary>
+            Count All Orders
+            </summary>
+            <param></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.ByUser(System.String)">
+            <summary>
+            Get Orders By User
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetStore.Api.Controllers.v1.OrdersController.MarkCompleted(System.String)">
+            <summary>
+            Mark Orders as Completed
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
