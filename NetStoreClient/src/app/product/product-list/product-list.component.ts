@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "./products.service";
+import {productsDB} from "../../shared/data/products";
 
 // import { productsDB } from '../../shared/data/products';
 
@@ -13,14 +14,15 @@ export class ProductListComponent implements OnInit {
   advanceSearchExpanded: boolean = false;
   products: any[] = [];
 
-  constructor(public service: ProductsService) {
+  constructor() {
   }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.service.init();
+      this.products = productsDB.Product;
+      // this.service.init();
       this.isLoaded = true
     }, 8000);
-    this.products = this.service.topProducts;
+    // this.products = this.service.topProducts;
   }
 }

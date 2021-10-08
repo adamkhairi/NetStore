@@ -37,7 +37,10 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "tsparticles"
+            ]
           },
           "configurations": {
             "production": {
@@ -137,7 +140,15 @@
           "options": {
             "main": "projects/lib-shared/src/test.ts",
             "tsConfig": "projects/lib-shared/tsconfig.spec.json",
-            "karmaConfig": "projects/lib-shared/karma.conf.js"
+            "karmaConfig": "projects/lib-shared/karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
           }
         }
       }
