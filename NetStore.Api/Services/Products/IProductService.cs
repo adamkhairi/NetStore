@@ -11,8 +11,8 @@ namespace NetStore.Api.Services.Products
     {
         Task<ResponceProductDTO> Get(string id);
         Task<List<Product>> Get(GetAllProductsFilter filter = null, PaginationFilter paginationFilter = null);
-        Task<ICollection<Product>> GetByCategory(string id);
-        Task<ICollection<Product>> GetTopProducts();
+        Task<List<Product>> GetByCategory(string id);
+        Task<List<Product>> GetTopProducts();
         Task<bool> Post(AddProductDTO product);
         Task<Product> Put(string id, Product product);
         Task<bool> Delete(string id);

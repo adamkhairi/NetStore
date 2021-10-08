@@ -14,7 +14,6 @@ using NetStore.Shared.Models;
 
 namespace NetStore.Api.Controllers.v1
 {
-
     [Route("api/v1/[controller]")]
     [ApiController]
     //[Authorize]
@@ -38,12 +37,13 @@ namespace NetStore.Api.Controllers.v1
         /// <param name="paginationQuery"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResponce<Product>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.GetAll)]
         [HttpGet]
-        public async Task<IActionResult> GetProducts([FromQuery] PaginationQuery paginationQuery, [FromQuery] GetAllProductsQuery query)
+        public async Task<IActionResult> GetProducts([FromQuery] PaginationQuery paginationQuery,
+            [FromQuery] GetAllProductsQuery query)
         {
             var paginationFilter = _mapper.Map<PaginationFilter>(paginationQuery);
             var filter = _mapper.Map<GetAllProductsFilter>(query);
@@ -56,11 +56,15 @@ namespace NetStore.Api.Controllers.v1
             }
 
             var nextPage = paginationFilter.PageNumber >= 1
-                ? _uriService.GetAllUri(new PaginationQuery(paginationFilter.PageNumber + 1, paginationFilter.PageSize)).ToString() : null;
+                ? _uriService.GetAllUri(new PaginationQuery(paginationFilter.PageNumber + 1, paginationFilter.PageSize))
+                    .ToString()
+                : null;
 
 
             var previousPage = paginationFilter.PageNumber - 1 >= 1
-                ? _uriService.GetAllUri(new PaginationQuery(paginationFilter.PageNumber - 1, paginationFilter.PageSize)).ToString() : null;
+                ? _uriService.GetAllUri(new PaginationQuery(paginationFilter.PageNumber - 1, paginationFilter.PageSize))
+                    .ToString()
+                : null;
 
             //var paginationResponce = new PagedResponce<Product>(result);
             var paginationResponce = new PagedResponce<Product>
@@ -79,7 +83,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponceProductDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.Get)]
         [HttpGet("{id}")]
@@ -97,7 +101,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Responce<List<Product>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpGet(ApiRoutes.Product.GetByCat)]
         [HttpGet("[action]/{id}")]
@@ -106,7 +110,7 @@ namespace NetStore.Api.Controllers.v1
             var result = await _products.GetByCategory(id);
             if (result == null) return BadRequest();
 
-            return Ok(new Responce<ICollection<Product>>(result));
+            return Ok(new Responce<List<Product>>(result));
         }
 
         /// <summary>
@@ -114,25 +118,25 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Responce<List<Product>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         //[HttpGet(ApiRoutes.Product.GetTopProducts)]
         [HttpGet("[action]")]
         public async Task<IActionResult> GetTopProducts()
         {
             var result = await _products.GetTopProducts();
-            if (result == null) return BadRequest();
+            if (result == null) return NoContent();
 
-            return Ok(result);
+            return Ok(new Responce<List<Product>>(result));
         }
 
-     
+
         /// <summary>
         /// Post New Product 
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         //[Authorize(Roles = "Admin")]
@@ -153,7 +157,7 @@ namespace NetStore.Api.Controllers.v1
         /// <param name="id"></param>
         /// <param name="product"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         //[Authorize(Roles = "Admin")]
@@ -173,7 +177,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         //[Authorize(Roles = "Admin")]

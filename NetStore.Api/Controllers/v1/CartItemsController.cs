@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetStore.Api.Contracts.Requests;
+using NetStore.Api.Contracts.Responces;
 using NetStore.Api.Services.CartItems;
 
 namespace NetStore.Api.Controllers.v1
@@ -11,22 +13,22 @@ namespace NetStore.Api.Controllers.v1
     //[Authorize]
     public class CartItemsController : ControllerBase
     {
-        public ICartItemsService _cartItems { get; }
+        private readonly ICartItemsService _cartItems;
 
         public CartItemsController(ICartItemsService cartItems)
         {
             _cartItems = cartItems;
         }
-        
+
         // GET: CartItemsController
         /// <summary>
         ///  Return List of ResponceCartItem 
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(List<ResponceCartItem>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponceCartItem>), StatusCodes.Status204NoContent)]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetCartItem(string userId)
         {
             var result = await _cartItems.Get(userId);
@@ -38,72 +40,71 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="cartItem"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> PostCartItem([FromBody] CartItemRequest cartItem)
         {
             if (!ModelState.IsValid) return BadRequest();
             var result = await _cartItems.Post(cartItem);
-            return result == false ? BadRequest() : Ok(result);
+            return result == false ? BadRequest() : Ok(true);
         }
 
         /// <summary>
         /// Count CartItems by User
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [HttpGet("[action]/{id}")]
+        [ProducesResponseType(typeof(CountResponce), StatusCodes.Status200OK)]
+        [ProducesResponseType( StatusCodes.Status204NoContent)]
+        [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> CountCartItems(string userId)
         {
             var result = await _cartItems.CountItems(userId);
             return result.Counter != 0 ? Ok(result) : NoContent();
-
         }
 
         /// <summary>
         /// Count SubTotal of the CartItems By User
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(SubTotalAmountResponce), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> SubTotalCartItem(string userId)
         {
             var result = await _cartItems.SubTotal(userId);
 
             return result.TotalAmount != 0 ? Ok(result) : NoContent();
         }
-
+        
         /// <summary>
         /// Count Total of the CartItems By User
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TotalItemsQtyResponce), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> TotalItems(string id)
+        [HttpGet("[action]/{userId}")]
+        public async Task<IActionResult> TotalItems(string userId)
         {
-            var result = await _cartItems.TotalItems(id);
+            var result = await _cartItems.TotalItems(userId);
             return result.TotalItems != 0 ? Ok(result) : NoContent();
         }
 
         /// <summary>
-        /// Delete All CartItems By User
+        ///  Delete All CartItems By User
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpDelete("{id}")]
+        [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteCartItem(string userId)
         {
             var result = await _cartItems.Delete(userId);
-            return result == false ? BadRequest() : Ok(result);
+            return result == false ? BadRequest("NoContent") : Ok(true);
         }
     }
 }

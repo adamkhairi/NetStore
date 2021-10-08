@@ -1,0 +1,13 @@
+.footer {
+  background-color: #000000;
+}
+
+._nav {
+  &__link {
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

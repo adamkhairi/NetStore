@@ -25,8 +25,8 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(AuthModel) ,StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AuthModel) ,StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
@@ -53,8 +53,8 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns type="AuthModel"></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(AuthModel) ,StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AuthModel) ,StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody] TokenRequestModel model)
         {

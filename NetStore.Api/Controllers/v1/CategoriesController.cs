@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetStore.Api.Services.Categories;
@@ -24,7 +25,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetCategory()
@@ -40,7 +41,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         // [Authorize(Roles = "Admin")]
         //[HttpGet(ApiRoutes.Category.Get)]
@@ -51,13 +52,13 @@ namespace NetStore.Api.Controllers.v1
             if (cat == null) return NotFound();
             return Ok(cat);
         }
-        
+
         /// <summary>
         /// Count SubTotal of the CartItems By User
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize(Roles = "Admin")]
@@ -73,7 +74,7 @@ namespace NetStore.Api.Controllers.v1
         }
 
         /// <summary>
-        /// Count SubTotal of the CartItems By User
+        /// Delete Category
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -90,12 +91,12 @@ namespace NetStore.Api.Controllers.v1
         }
 
         /// <summary>
-        /// Count SubTotal of the CartItems By User
+        /// Update Category
         /// </summary>
         /// <param name="id"></param>
         /// <param name="category"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize(Roles = "Admin")]

@@ -65,7 +65,7 @@ namespace NetNgStore.Services.Products
             return queryable;
         }
 
-        public async Task<ICollection<Product>> GetByCategory(string id)
+        public async Task<List<Product>> GetByCategory(string id)
         {
             var result = await _db.Products.Where(p => p.CategoryId == id).ToListAsync();
             if (result.Count > 0)
@@ -73,12 +73,10 @@ namespace NetNgStore.Services.Products
             return null;
         }
 
-        public async Task<ICollection<Product>> GetTopProducts()
+        public async Task<List<Product>> GetTopProducts()
         {
             var result = await _db.Products.Where(p => p.IsTopProduct == true).ToListAsync();
-            if (result.Count > 0)
-                return result;
-            return null;
+            return result.Count <= 0 ? null : result;
         }
         //TODO!: Fix This
 

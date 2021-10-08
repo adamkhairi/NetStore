@@ -8,13 +8,13 @@
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
     "paths": {
-      "lib": [
-        "dist/lib/lib",
-        "dist/lib"
+      "lib-shared": [
+        "dist/lib-shared/lib-shared",
+        "dist/lib-shared"
       ]
     },
-    "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

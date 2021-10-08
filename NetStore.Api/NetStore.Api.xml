@@ -22,7 +22,7 @@
             <summary>
              Return List of ResponceCartItem 
             </summary>
-            <param name="id"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CartItemsController.PostCartItem(NetStore.Api.Contracts.Requests.CartItemRequest)">
@@ -36,28 +36,28 @@
             <summary>
             Count CartItems by User
             </summary>
-            <param name="id"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CartItemsController.SubTotalCartItem(System.String)">
             <summary>
             Count SubTotal of the CartItems By User
             </summary>
-            <param name="id"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CartItemsController.TotalItems(System.String)">
             <summary>
             Count Total of the CartItems By User
             </summary>
-            <param name="id"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CartItemsController.DeleteCartItem(System.String)">
             <summary>
-            Delete All CartItems By User
+             Delete All CartItems By User
             </summary>
-            <param name="id"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CategoriesController.GetCategory">
@@ -83,14 +83,14 @@
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CategoriesController.DeleteCategory(System.String)">
             <summary>
-            Count SubTotal of the CartItems By User
+            Delete Category
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:NetStore.Api.Controllers.v1.CategoriesController.PutCategory(System.String,NetStore.Shared.Models.Category)">
             <summary>
-            Count SubTotal of the CartItems By User
+            Update Category
             </summary>
             <param name="id"></param>
             <param name="category"></param>

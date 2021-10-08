@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetStore.Api.Contracts.Requests;
+using NetStore.Api.Contracts.Responces;
 using NetStore.Api.Services.Orders;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,7 +27,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponceOrderDetailDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         // [Authorize(Roles = "Admin")]
@@ -44,12 +46,12 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         // [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> PostOrder([FromForm] RequestOrder order)
+        public async Task<IActionResult> PostOrder([FromBody] RequestOrder order)
         {
             if (!ModelState.IsValid) return BadRequest();
             var result = await _orders.Post(order);
@@ -63,7 +65,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponceOrderDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         // [Authorize(Roles = "Admin")]
         [HttpGet("[action]")]
@@ -80,7 +82,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponceOrderDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         // [Authorize(Roles = "Admin")]
         [HttpGet("[action]")]
@@ -97,7 +99,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CountResponce), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         // [Authorize(Roles = "Admin")]
         [HttpGet("[action]")]
@@ -114,7 +116,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponceOrderDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         // [Authorize(Roles = "Admin")]
         [HttpGet("[action]/{id}")]
@@ -131,7 +133,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         // [Authorize(Roles = "Admin")]

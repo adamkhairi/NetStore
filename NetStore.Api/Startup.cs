@@ -44,12 +44,22 @@ namespace NetStore.Api
 
         public IConfiguration Configuration { get; }
 
+        private const string AllowAllCors = "AllowAll";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Jwt>(Configuration.GetSection("Jwt"));
-
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAllCors,
+                    builder =>
+                    {
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyOrigin();
+                    });
+            });
 
             //!! Add Identity with Roles ===>
 
@@ -139,13 +149,7 @@ namespace NetStore.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            // global cors policy
-            app.UseCors(x => x
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true) // allow any origin
-                .AllowCredentials()); // allow credentials
-
+            app.UseCors(AllowAllCors);
             app.UseAuthentication();
             app.UseAuthorization();
 

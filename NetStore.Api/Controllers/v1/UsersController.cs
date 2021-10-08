@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<UserModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
@@ -46,7 +47,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet("[action]")]
@@ -56,7 +57,7 @@ namespace NetStore.Api.Controllers.v1
 
             var result = await _userService.Get(id);
 
-            if (result is null) return BadRequest(result.Message);
+            if (string.IsNullOrWhiteSpace(result.Id)) return BadRequest(result.Message);
 
             return Ok(result);
         }
@@ -66,7 +67,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AuthModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]
@@ -93,7 +94,7 @@ namespace NetStore.Api.Controllers.v1
         /// <param name="id"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserModel), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]
@@ -114,7 +115,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize] 
@@ -133,7 +134,7 @@ namespace NetStore.Api.Controllers.v1
        /// Return List of Users and Roles
        /// </summary>
        /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]
@@ -158,7 +159,7 @@ namespace NetStore.Api.Controllers.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         // [Authorize]  

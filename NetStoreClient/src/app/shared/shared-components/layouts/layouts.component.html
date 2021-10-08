@@ -1,0 +1,16 @@
+<div [class.example-is-mobile]="isLessThenLargeDevice">
+  <mat-sidenav-container class="kl-sidenav-container">
+    <mat-sidenav #sidenav [opened]="isSidenavExpand && isLessThenLargeDevice" [mode]="'over'"
+                 [fixedInViewport]="isLessThenLargeDevice">
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-header (toggleSidenav)="toggleSidenav()" [topFixed]="true"></app-header>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+      <app-feature></app-feature>
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

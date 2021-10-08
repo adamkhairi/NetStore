@@ -111,23 +111,23 @@
         }
       }
     },
-    "lib": {
+    "lib-shared": {
       "projectType": "library",
-      "root": "projects/lib",
-      "sourceRoot": "projects/lib/src",
+      "root": "projects/lib-shared",
+      "sourceRoot": "projects/lib-shared/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/lib/ng-package.json"
+            "project": "projects/lib-shared/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/lib/tsconfig.lib.prod.json"
+              "tsConfig": "projects/lib-shared/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/lib/tsconfig.lib.json"
+              "tsConfig": "projects/lib-shared/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -135,112 +135,9 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/lib/src/test.ts",
-            "tsConfig": "projects/lib/tsconfig.spec.json",
-            "karmaConfig": "projects/lib/karma.conf.js"
-          }
-        }
-      }
-    },
-    "netstore": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "projects/netstore",
-      "sourceRoot": "projects/netstore/src",
-      "prefix": "netstore",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/netstore",
-            "index": "projects/netstore/src/index.html",
-            "main": "projects/netstore/src/main.ts",
-            "polyfills": "projects/netstore/src/polyfills.ts",
-            "tsConfig": "projects/netstore/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/netstore/src/favicon.ico",
-              "projects/netstore/src/assets"
-            ],
-            "styles": [
-              "projects/netstore/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/netstore/src/environments/environment.ts",
-                  "with": "projects/netstore/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "netstore:build:production"
-            },
-            "development": {
-              "browserTarget": "netstore:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "netstore:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/netstore/src/test.ts",
-            "polyfills": "projects/netstore/src/polyfills.ts",
-            "tsConfig": "projects/netstore/tsconfig.spec.json",
-            "karmaConfig": "projects/netstore/karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/netstore/src/favicon.ico",
-              "projects/netstore/src/assets"
-            ],
-            "styles": [
-              "projects/netstore/src/styles.scss"
-            ],
-            "scripts": []
+            "main": "projects/lib-shared/src/test.ts",
+            "tsConfig": "projects/lib-shared/tsconfig.spec.json",
+            "karmaConfig": "projects/lib-shared/karma.conf.js"
           }
         }
       }
