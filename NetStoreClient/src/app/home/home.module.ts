@@ -10,6 +10,7 @@ import {NgParticlesModule} from 'ng-particles';
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @NgModule({
   declarations: [HomeComponent, HomeProductsComponent],
@@ -21,6 +22,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    NgxSkeletonLoaderModule,
 
   ]
 })

@@ -11,6 +11,8 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [ProductListComponent, ProductDetailsComponent, ProductHeroComponent],
@@ -23,7 +25,10 @@ import {MatCardModule} from "@angular/material/card";
     NgxSkeletonLoaderModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class ProductModule {

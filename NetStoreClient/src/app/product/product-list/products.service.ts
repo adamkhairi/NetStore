@@ -1,15 +1,24 @@
 import {Injectable} from '@angular/core';
-import {StoreClientApi} from "../../shared/data/netStoreClient";
+import {ProductListResponce, StoreClientApi} from "../../shared/data/Client.Api";
+import {NotificationService} from "../../shared/notification.service";
+import {Router} from "@angular/router";
+import {finalize} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductsService {
-  private _baseUrl = 'https://localhost:5001';
-  public topProducts: any;
+  public isLoaded!: boolean;
+  public topProductsList!: ProductListResponce;
+  public productsList!: ProductListResponce;
 
-  constructor() {
+  constructor(
+    private client: StoreClientApi,
+    public notification: NotificationService,
+    public router: Router,
+    // public fb: FormBuilder,
+  ) {
   }
 
   // init() {
@@ -18,6 +27,38 @@ export class ProductsService {
   //   });
   //
   // }
+
+  public getTopProducts() {
+    this.isLoaded = false;
+    this.client
+      .getTopProducts()
+      .pipe(
+        finalize(() => {
+
+          this.isLoaded = true;
+        })
+      )
+      .subscribe(data => {
+        this.topProductsList = data;
+      });
+    return this.topProductsList;
+  }
+
+  public getProducts(pageNumber?: number, pageSize?: number, title?: string) {
+    this.isLoaded = false;
+    this.client
+      .getProducts(pageNumber, pageSize, title)
+      .pipe(
+        finalize(() => {
+
+          this.isLoaded = true;
+        })
+      )
+      .subscribe(data => {
+        this.productsList = data;
+      });
+    return this.topProductsList;
+  }
 }
 
 

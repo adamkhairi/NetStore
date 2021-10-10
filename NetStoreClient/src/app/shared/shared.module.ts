@@ -13,6 +13,9 @@ import {FeatureComponent} from "./shared-components/feature/feature.component";
 import {MatCardModule} from "@angular/material/card";
 import {LoaderComponent} from "./shared-components/loader/loader.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {HttpClientModule} from "@angular/common/http";
+import {CardProductComponent} from './shared-components/card-product/card-product.component';
 
 
 @NgModule({
@@ -22,7 +25,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     SideNavComponent,
     FooterComponent,
     FeatureComponent,
-    LoaderComponent
+    LoaderComponent,
+    CardProductComponent,
+
   ],
   imports: [
     CommonModule,
@@ -33,8 +38,15 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
+    HttpClientModule
   ],
-  exports: []
+  exports: [
+    HttpClientModule,
+    CardProductComponent,
+
+
+  ]
 })
 export class SharedModule {
 }

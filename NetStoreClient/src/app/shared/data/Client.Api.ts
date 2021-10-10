@@ -40,7 +40,7 @@ export class AuthClientApi implements IAuthClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**
@@ -231,7 +231,7 @@ export class CartItemsClientApi implements ICartItemsClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**
@@ -686,7 +686,7 @@ export class CategoriesClientApi implements ICategoriesClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**
@@ -1103,7 +1103,7 @@ export class OrdersClientApi implements IOrdersClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**
@@ -1652,7 +1652,7 @@ export class StoreClientApi implements IStoreClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**
@@ -2223,7 +2223,7 @@ export class UsersClientApi implements IUsersClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**
@@ -2777,7 +2777,7 @@ export class WeatherForecastClientApi implements IWeatherForecastClientApi {
 
   constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
     this.http = http;
-    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "ws://";
+    this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
   }
 
   /**

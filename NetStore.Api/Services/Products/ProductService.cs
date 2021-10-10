@@ -75,7 +75,7 @@ namespace NetNgStore.Services.Products
 
         public async Task<List<Product>> GetTopProducts()
         {
-            var result = await _db.Products.Where(p => p.IsTopProduct == true).ToListAsync();
+            var result = await _db.Products.Where(p => p.IsTopProduct == true).Take(6).ToListAsync();
             return result.Count <= 0 ? null : result;
         }
         //TODO!: Fix This

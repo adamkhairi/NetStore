@@ -11,7 +11,7 @@
   },
   "codeGenerators": {
     "openApiToTypeScriptClient": {
-      "className": "{controller}Client",
+      "className": "{controller}ClientApi",
       "moduleName": "",
       "namespace": "",
       "typeScriptVersion": 2.7,
@@ -29,7 +29,7 @@
       "generateOptionalParameters": true,
       "exportTypes": true,
       "wrapDtoExceptions": false,
-      "exceptionClass": "ClientApiException",
+      "exceptionClass": "ApiException",
       "clientBaseClass": null,
       "wrapResponses": false,
       "wrapResponseMethods": [],
@@ -40,7 +40,7 @@
       "useTransformOptionsMethod": false,
       "useTransformResultMethod": false,
       "generateDtoTypes": true,
-      "operationGenerationMode": "MultipleClientsFromFirstTagAndPathSegments",
+      "operationGenerationMode": "MultipleClientsFromFirstTagAndOperationId",
       "markOptionalProperties": true,
       "generateCloneMethod": false,
       "typeStyle": "Class",

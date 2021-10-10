@@ -1,28 +1,31 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductsService} from "./products.service";
 import {productsDB} from "../../shared/data/products";
+import {ProductsService} from "./products.service";
 
 // import { productsDB } from '../../shared/data/products';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
+
 })
 export class ProductListComponent implements OnInit {
-  isLoaded!: boolean;
+
   advanceSearchExpanded: boolean = false;
   products: any[] = [];
 
-  constructor() {
+  constructor(public service: ProductsService) {
   }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.products = productsDB.Product;
-      // this.service.init();
-      this.isLoaded = true
-    }, 8000);
+      this.service.getTopProducts();
+      this.service.getProducts();
+    }, 3000);
+
+
     // this.products = this.service.topProducts;
   }
 }

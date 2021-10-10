@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {HomeService} from "../home.service";
+import {productsDB} from "../../shared/data/products";
 
 // import { productsDB } from '../../shared/data/products';
 @Component({
@@ -9,11 +11,16 @@ import {Component, OnInit} from '@angular/core';
 export class HomeProductsComponent implements OnInit {
   products: any[] = [];
 
-  constructor() {
+  constructor(public service: HomeService) {
 
   }
 
   ngOnInit(): void {
+    // setTimeout(() => {
+    this.products = productsDB.Product;
+    this.service.getTopProducts();
+    // this.service.isLoaded = true;
+    // }, 8000);
   }
 
 }

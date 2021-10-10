@@ -2,19 +2,26 @@ import {Injectable} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthClientApi, RegisterModel} from 'src/app/app.component';
 import {Router} from "@angular/router";
+import {NotificationService} from "../../shared/notification.service";
+import {HttpClient} from "@angular/common/http";
+import {finalize} from "rxjs/operators";
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SignupService {
-  private _baseUrl = 'https://localhost:5001'
 
-  constructor(private client: AuthClientApi, public router: Router, public fb: FormBuilder) {
+  constructor(
+    private client: AuthClientApi,
+    public router: Router,
+    public fb: FormBuilder,
+    public http: HttpClient,
+    public notification: NotificationService,
+  ) {
+    // this.client = new AuthClientApi(this.http);
   }
 
   public register!: RegisterModel;
-
+  public isLoading = false;
   public signupForm = this.fb.group({
     firstName: [null, [Validators.required]],
     lastName: [null, [Validators.required]],
@@ -31,6 +38,7 @@ export class SignupService {
   });
 
   public onSubmit() {
+    this.isLoading = true;
     const obj = {
       ...this.signupForm.value
     };
@@ -38,12 +46,15 @@ export class SignupService {
     const model = RegisterModel.fromJS(obj);
     this.client.register(model)
       .pipe(
-
+        finalize(() => this.isLoading = false)
       )
       .subscribe(data => {
         console.log(data)
-        if (data) {
+        if (data.message == null) {
           this.router.navigate(['/']);
+          this.notification.success('Welcome ' + data.username)
+        } else {
+          this.notification.error(data.message)
         }
       })
 

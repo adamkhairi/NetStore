@@ -1,15 +1,33 @@
 import {Injectable} from '@angular/core';
+import {finalize} from "rxjs/operators";
+import {ProductListResponce, StoreClientApi} from "../shared/data/Client.Api";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  private _baseUrl = 'https://localhost:5001'
+  public topProductsList!: ProductListResponce;
+  public isLoaded!: boolean;
 
-  // public topProducts !: ProductListResponce;
+  constructor(
+    private client: StoreClientApi,
+  ) {
+  }
 
-  constructor() {
+  public getTopProducts() {
+    this.isLoaded = false;
+    this.client
+      .getTopProducts()
+      .pipe(
+        finalize(() => {
+
+          this.isLoaded = true;
+        })
+      )
+      .subscribe(data => {
+        this.topProductsList = data;
+      });
   }
 
   init() {

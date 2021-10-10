@@ -15,4 +15,4 @@ export class AppComponent {
 
 }
 
-export * from "./shared/data/netStoreClient"
+export * from "./shared/data/Client.Api"
