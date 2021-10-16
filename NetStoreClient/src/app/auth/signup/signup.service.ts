@@ -5,17 +5,18 @@ import {Router} from "@angular/router";
 import {NotificationService} from "../../shared/notification.service";
 import {HttpClient} from "@angular/common/http";
 import {finalize} from "rxjs/operators";
+import {SharedFunctions} from "../../shared/data/shared-functions";
 
 
 @Injectable()
 export class SignupService {
 
   constructor(
-    private client: AuthClientApi,
-    public router: Router,
-    public fb: FormBuilder,
-    public http: HttpClient,
-    public notification: NotificationService,
+      private client: AuthClientApi,
+      public router: Router,
+      public fb: FormBuilder,
+      public http: HttpClient,
+      public notification: NotificationService,
   ) {
     // this.client = new AuthClientApi(this.http);
   }
@@ -45,18 +46,19 @@ export class SignupService {
 
     const model = RegisterModel.fromJS(obj);
     this.client.register(model)
-      .pipe(
-        finalize(() => this.isLoading = false)
-      )
-      .subscribe(data => {
-        console.log(data)
-        if (data.message == null) {
-          this.router.navigate(['/']);
-          this.notification.success('Welcome ' + data.username)
-        } else {
-          this.notification.error(data.message)
-        }
-      })
+        .pipe(
+            finalize(() => this.isLoading = false)
+        )
+        .subscribe(async data => {
+          console.log(data)
+          if (data.message == null && data.isAuthenticated) {
+            SharedFunctions.setToLocalStorage(data)
+            await this.router.navigate(['/']);
+            this.notification.success('Welcome ' + data.username)
+          } else {
+            this.notification.error(data.message as string)
+          }
+        })
 
   }
 }

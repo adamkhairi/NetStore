@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {productsDB} from "../../shared/data/products";
 
 // import { productsDB } from 'src/app/shared/data/products';
 
@@ -16,6 +17,6 @@ export class DashboardSavedItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.products = productsDB.Product;
+    this.products = productsDB.Product;
   }
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {SharedFunctions} from "../shared/data/shared-functions";
 
 
 @Component({
@@ -8,6 +9,7 @@ import {Component, OnInit} from '@angular/core';
   providers: []
 })
 export class HomeComponent implements OnInit {
+  isAuthenticated!: boolean;
 
   particlesOptions = {
     particles: {
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
   };
 
   constructor() {
+    this.isAuthenticated = SharedFunctions.isUserAuthenticated()
   }
 
   ngOnInit(): void {

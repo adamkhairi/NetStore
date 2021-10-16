@@ -14,6 +14,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {SharedModule} from "./shared/shared.module";
+import {JwtModule} from "@auth0/angular-jwt";
+import {SharedFunctions} from "./shared/data/shared-functions";
 
 export const MaterialModules = [
   MatCardModule,
@@ -21,7 +23,7 @@ export const MaterialModules = [
   MatSidenavModule,
   MatIconModule,
   MatInputModule,
-  MatButtonModule
+  MatButtonModule,
 ];
 
 export const common = [
@@ -40,6 +42,13 @@ export const common = [
     BrowserAnimationsModule,
     SharedModule,
     NgxSkeletonLoaderModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: SharedFunctions.GetToken,
+        allowedDomains: ["https://localhost:5001"],
+        disallowedRoutes: [],
+      }
+    })
   ],
   providers: [
     {

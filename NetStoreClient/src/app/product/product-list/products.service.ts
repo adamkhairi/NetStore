@@ -57,7 +57,7 @@ export class ProductsService {
       .subscribe(data => {
         this.productsList = data;
       });
-    return this.topProductsList;
+    return this.productsList;
   }
 }
 

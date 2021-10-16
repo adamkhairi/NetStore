@@ -5,12 +5,17 @@ import {DashboardLayoutComponent} from './dashboard-layout/dashboard-layout.comp
 import {DashboardOrderComponent} from './dashboard-order/dashboard-order.component';
 import {DashboardProfileComponent} from './dashboard-profile/dashboard-profile.component';
 import {DashboardSavedItemComponent} from './dashboard-saved-item/dashboard-saved-item.component';
+import {DashboardProductsComponent} from "./dashboard-products/dashboard-products.component";
+import {DashboardCategoriesComponent} from "./dashboard-categories/dashboard-categories.component";
+import {DashboardUsersComponent} from "./dashboard-users/dashboard-users.component";
+import {AuthGuardService} from "../shared/guards/auth.guard.service";
 
 const DashboardChildrenRoute: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: DashboardIndexComponent
+    component: DashboardIndexComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'saved-items',
@@ -23,6 +28,18 @@ const DashboardChildrenRoute: Routes = [
   {
     path: 'orders',
     component: DashboardOrderComponent
+  },
+  {
+    path: 'products',
+    component: DashboardProductsComponent
+  },
+  {
+    path: 'categories',
+    component: DashboardCategoriesComponent
+  },
+  {
+    path: 'users',
+    component: DashboardUsersComponent
   }
 ];
 

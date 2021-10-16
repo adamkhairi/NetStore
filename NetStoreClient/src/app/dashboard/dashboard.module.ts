@@ -15,6 +15,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
+import {DashboardProductsComponent} from './dashboard-products/dashboard-products.component';
+import {DashboardCategoriesComponent} from './dashboard-categories/dashboard-categories.component';
+import {DashboardUsersComponent} from './dashboard-users/dashboard-users.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -22,9 +30,33 @@ import {MatCardModule} from "@angular/material/card";
     DashboardIndexComponent,
     DashboardSavedItemComponent,
     DashboardProfileComponent,
-    DashboardOrderComponent
+    DashboardOrderComponent,
+    DashboardProductsComponent,
+    DashboardCategoriesComponent,
+    DashboardUsersComponent
   ],
-  imports: [CommonModule, DashboardRoutingModule, SharedModule, MatMenuModule, MatIconModule, MatButtonModule, MatSidenavModule, MatListModule, MatCardModule]
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    SharedModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
+  ]
+  ,
+  exports: [
+    DashboardProductsComponent,
+    DashboardCategoriesComponent,
+    DashboardUsersComponent
+  ]
 })
 export class DashboardModule {
 }

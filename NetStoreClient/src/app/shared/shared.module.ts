@@ -16,6 +16,12 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {HttpClientModule} from "@angular/common/http";
 import {CardProductComponent} from './shared-components/card-product/card-product.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -39,12 +45,33 @@ import {CardProductComponent} from './shared-components/card-product/card-produc
     MatCardModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
     HttpClientModule
   ],
   exports: [
     HttpClientModule,
     CardProductComponent,
-
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule
 
   ]
 })

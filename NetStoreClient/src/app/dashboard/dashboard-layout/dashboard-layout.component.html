@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="isAuthenticated">
   <mat-sidenav-container class="kl-sidenav-container">
     <mat-sidenav #sidenav [opened]="false" [mode]="'over'" [fixedInViewport]="isLessThenLargeDevice">
       <div class="rounded-md border overflow-hidden w-72">
@@ -8,8 +8,8 @@
         </div>
         <mat-nav-list class="_sidenav">
           <a
-            mat-list-item
-            routerLink="/dashboard"
+                 mat-list-item
+                 routerLink="/dashboard"
             [routerLinkActiveOptions]="{ exact: true }"
             routerLinkActive="bg-gray-200"
             class="font-semibold text-gray-500 hover:text-primary"
@@ -99,28 +99,55 @@
                       Dashboard</a
                     >
                     <a
-                      mat-list-item
-                      routerLink="/dashboard/profile"
-                      routerLinkActive="bg-gray-200"
-                      class="font-semibold text-gray-500 hover:text-primary"
+                           mat-list-item
+                           routerLink="/dashboard/profile"
+                           routerLinkActive="bg-gray-200"
+                           class="font-semibold text-gray-500 hover:text-primary"
                     >
                       <mat-icon class="mr-2">account_circle</mat-icon>
                       View my profile</a
                     >
                     <a
-                      mat-list-item
-                      routerLink="/dashboard/saved-items"
-                      routerLinkActive="bg-gray-200"
-                      class="font-semibold text-gray-500 hover:text-primary"
+                           mat-list-item
+                           routerLink="/dashboard/products"
+                           routerLinkActive="bg-gray-200"
+                           class="font-semibold text-gray-500 hover:text-primary"
+                    >
+                      <mat-icon class="mr-2">store_mall_directory</mat-icon>
+                      Products</a
+                    >
+                    <a
+                           mat-list-item
+                           routerLink="/dashboard/categories"
+                           routerLinkActive="bg-gray-200"
+                           class="font-semibold text-gray-500 hover:text-primary"
+                    >
+                      <mat-icon class="mr-2">apps</mat-icon>
+                      Categories</a
+                    >
+                    <a
+                           mat-list-item
+                           routerLink="/dashboard/users"
+                           routerLinkActive="bg-gray-200"
+                           class="font-semibold text-gray-500 hover:text-primary"
+                    >
+                      <mat-icon class="mr-2">people</mat-icon>
+                      Manage Users</a
+                    >
+                    <a
+                           mat-list-item
+                           routerLink="/dashboard/saved-items"
+                           routerLinkActive="bg-gray-200"
+                           class="font-semibold text-gray-500 hover:text-primary"
                     >
                       <mat-icon class="mr-2">list</mat-icon>
                       Saved Items</a
                     >
                     <a
-                      mat-list-item
-                      routerLink="/dashboard/orders"
-                      routerLinkActive="bg-gray-200"
-                      class="font-semibold text-gray-500 hover:text-primary"
+                           mat-list-item
+                           routerLink="/dashboard/orders"
+                           routerLinkActive="bg-gray-200"
+                           class="font-semibold text-gray-500 hover:text-primary"
                     >
                       <mat-icon class="mr-2">article</mat-icon>
                       Orders</a

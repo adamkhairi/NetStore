@@ -25,10 +25,10 @@ export class NotificationService {
   }
 
   private show(message: string, style: 'none' | 'success' | 'warning' | 'error' | 'info') {
-    this.snack.open(message, '', {
+    this.snack.open(message, 'x', {
       panelClass: ['snackbar', style],
-      // horizontalPosition: 'right',
-      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
       duration: 5000
     });
   }
