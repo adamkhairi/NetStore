@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     if (this.isAuthenticated) {
       this.User = SharedFunctions.getDataFromLocalStorage();
       this.isAdmin = this.User.roles.toLowerCase().includes('admin');
-      console.log();
+      console.log(this.User);
     }
   }
 

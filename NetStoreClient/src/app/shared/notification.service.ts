@@ -25,7 +25,7 @@ export class NotificationService {
   }
 
   private show(message: string, style: 'none' | 'success' | 'warning' | 'error' | 'info') {
-    this.snack.open(message, 'x', {
+    this.snack.open(message, '', {
       panelClass: ['snackbar', style],
       horizontalPosition: 'center',
       verticalPosition: 'bottom',

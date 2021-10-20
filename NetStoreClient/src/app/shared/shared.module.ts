@@ -17,11 +17,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {HttpClientModule} from "@angular/common/http";
 import {CardProductComponent} from './shared-components/card-product/card-product.component';
 import {MatMenuModule} from "@angular/material/menu";
-import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -36,6 +37,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule,
     MatListModule,
@@ -59,8 +62,19 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     HttpClientModule
   ],
   exports: [
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     CardProductComponent,
+    CommonModule,
+    RouterModule,
+    MatListModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
@@ -71,7 +85,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule,
+    LoaderComponent
 
   ]
 })

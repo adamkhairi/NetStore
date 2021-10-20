@@ -145,6 +145,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:NetStore.Api.Controllers.v1.StoreController.CountProducts">
+            <summary>
+            Count Products
+            </summary>
+            <param ></param>
+            <returns></returns>
+        </member>
         <member name="M:NetStore.Api.Controllers.v1.StoreController.GetProducts(NetStore.Api.Contracts.Queries.PaginationQuery,NetStore.Api.Contracts.Queries.GetAllProductsQuery)">
             <summary>
             Get All Product Apply Pagination and Search

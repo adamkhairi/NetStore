@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!service.isLoading">
   <!-- User Start -->
   <div class="flex flex-wrap">
     <div class="flex space-x-3 bg-primary rounded-md px-5 py-3 w-full sm:w-1/2">
@@ -6,17 +6,17 @@
         <img src="assets/images/user-128x128.jpg" alt="" class="w-full h-full object-cover">
       </div>
       <div class="text-white">
-        <h5>Abraham Lincoln</h5>
+        <h5>{{User?.firstName + ' ' + User?.lastName}}</h5>
         <p class="leading-normal text-white">
-          <span class="font-medium">Email</span>: example@mail.com</p>
+          <span class="font-medium">Email</span>: {{User?.email}}</p>
       </div>
     </div>
-    <div class="w-full sm:w-1/2 sm:pl-5 mt-5 mmd:t-0">
-      <p>
-        <strong>Member Since</strong>: 10 May 2020</p>
-      <p class="mt-1">
-        <strong>Organization</strong>: Tech Incent</p>
-    </div>
+    <!--    <div class="w-full sm:w-1/2 sm:pl-5 mt-5 mmd:t-0">-->
+    <!--      <p>-->
+    <!--        <strong>Member Since</strong>: 10 May 2020</p>-->
+    <!--      <p class="mt-1">-->
+    <!--        <strong>Organization</strong>: Tech Incent</p>-->
+    <!--    </div>-->
   </div>
   <!-- User End -->
   <!-- User Meta Start -->
@@ -35,7 +35,7 @@
             Email:
           </div>
           <div class="ll-dataset__value">
-            example@mail.com
+            {{User?.email}}
           </div>
         </div>
         <div class="ll-dataset mt-4">
@@ -53,7 +53,7 @@
             Username:
           </div>
           <div class="ll-dataset__value">
-            abraham_lincoln
+            {{User?.userName}}
           </div>
         </div>
         <div class="ll-dataset mt-4">
@@ -84,7 +84,7 @@
             First Name:
           </div>
           <div class="ll-dataset__value">
-            Abraham
+            {{User?.firstName}}
           </div>
         </div>
         <div class="ll-dataset mt-4">
@@ -92,7 +92,7 @@
             Last Name:
           </div>
           <div class="ll-dataset__value">
-            Lincoln
+            {{User?.lastName}}
           </div>
         </div>
         <div class="ll-dataset mt-4">
@@ -100,17 +100,17 @@
             Gender:
           </div>
           <div class="ll-dataset__value">
-            Male
+            {{User?.gender}}
           </div>
         </div>
-        <div class="ll-dataset mt-4">
-          <div class="ll-dataset__label">
-            Date of Birth:
-          </div>
-          <div class="ll-dataset__value">
-            07 Febuery 1995
-          </div>
-        </div>
+        <!--        <div class="ll-dataset mt-4">-->
+        <!--          <div class="ll-dataset__label">-->
+        <!--            Date of Birth:-->
+        <!--          </div>-->
+        <!--          <div class="ll-dataset__value">-->
+        <!--            07 Febuery 1995-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
       <div class="w-full sm:w-1/2 mt-4 sm:mt-0">
         <div class="ll-dataset">

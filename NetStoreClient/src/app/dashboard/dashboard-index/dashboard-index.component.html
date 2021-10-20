@@ -1,3 +1,4 @@
+<app-loader [show]="true" [center]="true"></app-loader>
 <div class="grid grid-cols-12 gap-4 lg:gap-8">
   <div class="col-span-6 md:col-span-4 border rounded px-4 lg:px-8 py-8 lg:py-16">
     <mat-icon class="text-accent mb-5">favorite_border</mat-icon>
@@ -60,7 +61,7 @@
         </td>
         <td>
           <div [ngClass]="{
-							'bg-blue-500 text-blue-500': order?.status === 'complated',
+							'bg-blue-500 text-blue-500': order?.status === 'completed',
 							'bg-red-500 text-red-500': order?.status === 'rejected',
 							'bg-yellow-500 text-yellow-900': order?.status === 'pending',
 							'bg-primary text-primary': order?.status === 'initialized'
@@ -74,7 +75,7 @@
           <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <mat-menu #menu="matMenu" xposition="before">
+          <mat-menu #menu="matMenu" xPosition="before">
             <button mat-menu-item>
               <mat-icon>dialpad</mat-icon>
               <span>Details</span>

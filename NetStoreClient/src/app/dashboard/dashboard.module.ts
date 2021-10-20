@@ -22,7 +22,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -49,13 +49,15 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule
+    FormsModule,
+    ReactiveFormsModule,
   ]
   ,
   exports: [
     DashboardProductsComponent,
     DashboardCategoriesComponent,
-    DashboardUsersComponent
+    DashboardUsersComponent,
+
   ]
 })
 export class DashboardModule {

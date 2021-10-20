@@ -65,6 +65,10 @@ export class SharedFunctions {
   public static GetToken = () => {
     return localStorage.getItem('token');
   }
+
+  public static UserId = () => {
+    return localStorage.getItem('userId');
+  }
   // public static  getUser=(userId: string)=>{
   //   if(userId){
   //     const user =

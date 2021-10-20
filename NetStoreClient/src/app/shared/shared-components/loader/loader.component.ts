@@ -7,14 +7,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class LoaderComponent implements OnInit {
   @Input() center!: boolean;
-  show: boolean = true;
+  @Input() show: boolean = true;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.show = false;
-    }, 2500);
+    // setTimeout(() => {
+    //   this.show = false;
+    // }, 3000);
   }
 }

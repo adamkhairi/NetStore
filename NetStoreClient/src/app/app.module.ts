@@ -12,10 +12,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
 import {SharedModule} from "./shared/shared.module";
 import {JwtModule} from "@auth0/angular-jwt";
 import {SharedFunctions} from "./shared/data/shared-functions";
+
 
 export const MaterialModules = [
   MatCardModule,
@@ -29,7 +29,6 @@ export const MaterialModules = [
 export const common = [
   FormsModule,
   ReactiveFormsModule,
-  HttpClientModule
 ];
 
 @NgModule({
@@ -42,6 +41,8 @@ export const common = [
     BrowserAnimationsModule,
     SharedModule,
     NgxSkeletonLoaderModule,
+    // ...MaterialModules,
+    ...common,
     JwtModule.forRoot({
       config: {
         tokenGetter: SharedFunctions.GetToken,

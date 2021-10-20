@@ -8,7 +8,6 @@ import {SharedModule} from '../shared/shared.module';
 import {MatIconModule} from "@angular/material/icon";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {HttpClientModule} from "@angular/common/http";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
@@ -22,7 +21,6 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatIconModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    HttpClientModule,
     MatCardModule,
     MatProgressSpinnerModule,
     FormsModule

@@ -10,6 +10,7 @@ namespace NetStore.Api.Services.Products
     public interface IProductService
     {
         Task<ResponceProductDTO> Get(string id);
+        Task<CountResponce> Count();
         Task<List<Product>> Get(GetAllProductsFilter filter = null, PaginationFilter paginationFilter = null);
         Task<List<Product>> GetByCategory(string id);
         Task<List<Product>> GetTopProducts();

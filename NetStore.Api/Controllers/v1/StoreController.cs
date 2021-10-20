@@ -22,13 +22,30 @@ namespace NetStore.Api.Controllers.v1
         private readonly IProductService _products;
         private readonly IUriService _uriService;
 
-        public IMapper _mapper { get; }
+        private IMapper Mapper { get; }
 
         public StoreController(IProductService products, IMapper mapper, IUriService uriService)
         {
             _products = products;
-            _mapper = mapper;
+            Mapper = mapper;
             _uriService = uriService;
+        }
+
+
+        /// <summary>
+        /// Count Products
+        /// </summary>
+        /// <param ></param>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(CountResponce), StatusCodes.Status200OK)]
+        //[HttpGet(ApiRoutes.Product.Get)]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> CountProducts()
+        {
+            var productCount = await this._products.Count();
+
+
+            return Ok(productCount);
         }
 
         /// <summary>
@@ -45,8 +62,8 @@ namespace NetStore.Api.Controllers.v1
         public async Task<IActionResult> GetProducts([FromQuery] PaginationQuery paginationQuery,
             [FromQuery] GetAllProductsQuery query)
         {
-            var paginationFilter = _mapper.Map<PaginationFilter>(paginationQuery);
-            var filter = _mapper.Map<GetAllProductsFilter>(query);
+            var paginationFilter = Mapper.Map<PaginationFilter>(paginationQuery);
+            var filter = Mapper.Map<GetAllProductsFilter>(query);
             var result = await _products.Get(filter, paginationFilter);
             if (result == null) return BadRequest();
 
@@ -59,8 +76,9 @@ namespace NetStore.Api.Controllers.v1
                 ? _uriService.GetAllUri(new PaginationQuery(paginationFilter.PageNumber + 1, paginationFilter.PageSize))
                     .ToString()
                 : null;
-
-
+            var firstPage = _uriService.GetAllUri(new PaginationQuery(1, paginationFilter.PageSize))
+                    .ToString()
+                ;
             var previousPage = paginationFilter.PageNumber - 1 >= 1
                 ? _uriService.GetAllUri(new PaginationQuery(paginationFilter.PageNumber - 1, paginationFilter.PageSize))
                     .ToString()

@@ -1,20 +1,18 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using ImageUploader;
+using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+using ImageUploader;
+using Microsoft.EntityFrameworkCore;
 using NetStore.Api.Contracts;
 using NetStore.Api.Contracts.Requests;
 using NetStore.Api.Contracts.Responces;
 using NetStore.Api.Data;
-using NetStore.Api.Services.Products;
 using NetStore.Shared.Models;
 
-namespace NetNgStore.Services.Products
+namespace NetStore.Api.Services.Products
 {
     public class ProductService : IProductService
     {
@@ -37,23 +35,32 @@ namespace NetNgStore.Services.Products
             };
         }
 
+        public async Task<CountResponce> Count()
+        {
+            return new CountResponce
+            {
+                Counter = await _db.Products.CountAsync()
+            };
+        }
+
         //TODO!:FixThis 
-        public async Task<List<Product>> Get(GetAllProductsFilter filter = null, PaginationFilter paginationFilter = null)
+        public async Task<List<Product>> Get(GetAllProductsFilter filter = null,
+            PaginationFilter paginationFilter = null)
         {
             var queryable = _db.Products.AsQueryable();
             if (paginationFilter == null)
             {
                 return await queryable.ToListAsync();
             }
+
             queryable = AddFiltersOnQuery(filter, queryable);
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
             var result = await queryable
+                .OrderBy(i => i.Name)
                 .Skip(skip)
                 .Take(paginationFilter.PageSize)
-                //.OrderBy(i=> i.Price == double.Parse(price))
                 .ToListAsync();
             return result;
-
         }
 
         private static IQueryable<Product> AddFiltersOnQuery(GetAllProductsFilter filter, IQueryable<Product> queryable)
@@ -114,10 +121,7 @@ namespace NetNgStore.Services.Products
             model.ImgUrl = imgList[0]?.ImgUrl ?? null;
 
             _db.Products.Add(model);
-            imgList?.ForEach(img =>
-            {
-                _db.Images.Add(img);
-            });
+            imgList?.ForEach(img => { _db.Images.Add(img); });
 
             await _db.SaveChangesAsync();
             return returnn;
@@ -151,8 +155,11 @@ namespace NetNgStore.Services.Products
             if (oldProduct == null) return null;
 
             oldProduct.Name = product.Name != null ? product.Name : oldProduct.Name;
-            oldProduct.ShortDescription = product.ShortDescription != null ? product.ShortDescription : oldProduct.ShortDescription;
-            oldProduct.LongDescription = product.LongDescription != null ? product.LongDescription : oldProduct.LongDescription;
+            oldProduct.ShortDescription = product.ShortDescription != null
+                ? product.ShortDescription
+                : oldProduct.ShortDescription;
+            oldProduct.LongDescription =
+                product.LongDescription != null ? product.LongDescription : oldProduct.LongDescription;
             oldProduct.Price = product.Price != 0 ? product.Price : oldProduct.Price;
             oldProduct.Stock = product.Stock != 0 ? product.Stock : oldProduct.Stock;
             oldProduct.Color = product.Color != null ? product.Color : oldProduct.Color;
@@ -161,7 +168,6 @@ namespace NetNgStore.Services.Products
 
             await _db.SaveChangesAsync();
             return product;
-
         }
 
         public async Task<bool> Delete(string id)

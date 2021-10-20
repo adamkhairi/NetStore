@@ -112,6 +112,7 @@ namespace NetStore.Api.Services.Auth
             authModel.Email = user.Email;
             authModel.Username = user.UserName;
             authModel.Roles = rolesList.ToList();
+            authModel.UserId = user.Id;
 
             return authModel;
         }
@@ -200,10 +201,10 @@ namespace NetStore.Api.Services.Auth
 
             var claims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim("uid", user.Id)
+                    new Claim("userid", user.Id)
                 }
                 .Union(userClaims)
                 .Union(roleClaims);

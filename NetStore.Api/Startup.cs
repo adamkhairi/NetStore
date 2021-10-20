@@ -20,7 +20,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NetNgStore.Services.Categories;
-using NetNgStore.Services.Products;
 using NetStore.Api.Data;
 using NetStore.Api.Helpers;
 using NetStore.Api.Services.Auth;

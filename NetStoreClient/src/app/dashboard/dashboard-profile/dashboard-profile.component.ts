@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
+import {ProfileService} from './profile.service';
+import {UserModel} from "../../shared/data/Client.Api";
 
 @Component({
   selector: 'app-dashboard-profile',
@@ -6,11 +8,15 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./dashboard-profile.component.scss']
 })
 export class DashboardProfileComponent implements OnInit {
+  @Output() User!: UserModel | null;
 
-  constructor() {
+  constructor(public service: ProfileService) {
+    this.service.getUserInfo()
   }
 
   ngOnInit(): void {
+    if (this.service.isLoading) {
+      this.User = this.service.User
+    }
   }
-
 }
