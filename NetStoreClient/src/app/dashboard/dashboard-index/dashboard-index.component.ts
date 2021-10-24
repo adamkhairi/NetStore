@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {OrdersService} from "../../shared/services/orders.service";
+import {finalize, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-dashboard-index',
@@ -7,11 +9,21 @@ import {Component, OnInit} from '@angular/core';
 })
 export class DashboardIndexComponent implements OnInit {
   orders: any[] = [];
+  public isLoaded!: boolean;
 
-  constructor() {
+  constructor(public service: OrdersService) {
   }
 
   ngOnInit(): void {
+    this.isLoaded = false;
+    this.service.getPendingOrders()
+        .pipe(
+            map((data) => data),
+            finalize(() => {
+              this.isLoaded = true
+            })
+        ).subscribe();
+
     this.orders = [
       {
         id: 'e5dcdfsf',

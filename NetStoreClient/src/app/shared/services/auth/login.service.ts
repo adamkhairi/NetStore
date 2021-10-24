@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
-import {AuthClientApi, TokenRequestModel} from "../../shared/data/Client.Api";
+import {AuthClientApi, TokenRequestModel} from "../../data/Client.Api";
 import {FormBuilder, Validators} from "@angular/forms";
-import {SharedFunctions} from "../../shared/data/shared-functions";
-import {NotificationService} from "../../shared/notification.service";
+import {SharedFunctions} from "../../data/shared-functions";
+import {NotificationService} from "../notification.service";
+import {finalize} from "rxjs/operators";
 
 @Injectable()
 export class LoginService {
   invalidLogin!: boolean;
+  public error: string | undefined;
 
   constructor(
       public router: Router,
@@ -30,17 +32,26 @@ export class LoginService {
     const model = TokenRequestModel.fromJS(credentials);
 
     this.client.login(model)
+        .pipe(finalize(() => {
+              //TODO!! Show Responce.Message
+              // this.notification.error(this.error)
+
+            })
+        )
         .subscribe(async data => {
-          const token = (<any>data).token;
+          // const token = (<any>data).token;
           if (data.isAuthenticated) {
-            SharedFunctions.setToLocalStorage(data)
+            SharedFunctions.setToLocalStorage(data);
             await this.router.navigate(['/']);
-            this.notification.success('Welcome Back !' + data.username)
+            this.notification.success('Welcome Back !' + data.username);
           } else {
-            console.log(data.message)
+            console.log(data.message);
+            this.error = data.message;
           }
         }, error => {
-          this.invalidLogin = true
+          this.error = error
+          // throwError(error);
+          this.invalidLogin = true;
         })
   }
 }

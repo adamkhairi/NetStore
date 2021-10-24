@@ -2,10 +2,9 @@ import {Injectable} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthClientApi, RegisterModel} from 'src/app/app.component';
 import {Router} from "@angular/router";
-import {NotificationService} from "../../shared/notification.service";
-import {HttpClient} from "@angular/common/http";
+import {NotificationService} from "../notification.service";
 import {finalize} from "rxjs/operators";
-import {SharedFunctions} from "../../shared/data/shared-functions";
+import {SharedFunctions} from "../../data/shared-functions";
 
 
 @Injectable()
@@ -15,7 +14,6 @@ export class SignupService {
       private client: AuthClientApi,
       public router: Router,
       public fb: FormBuilder,
-      public http: HttpClient,
       public notification: NotificationService,
   ) {
     // this.client = new AuthClientApi(this.http);

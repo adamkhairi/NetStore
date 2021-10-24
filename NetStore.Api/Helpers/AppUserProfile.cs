@@ -28,7 +28,10 @@ namespace NetStore.Api.Helpers
             CreateMap<PaginationQuery, PaginationFilter>();
             CreateMap<GetAllProductsQuery, GetAllProductsFilter>();
             CreateMap<List<Order>, List<ResponceOrderDto>>();
+            CreateMap<List<Product>, List<ResponceProductDTO>>();
+            CreateMap<Product, ResponceProductDTO>();
             CreateMap<Order, ResponceOrderDto>();
+         
         }
     }
 }

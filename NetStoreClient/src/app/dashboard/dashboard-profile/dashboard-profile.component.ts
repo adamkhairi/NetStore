@@ -1,5 +1,5 @@
 import {Component, OnInit, Output} from '@angular/core';
-import {ProfileService} from './profile.service';
+import {ProfileService} from '../../shared/services/profile.service';
 import {UserModel} from "../../shared/data/Client.Api";
 
 @Component({
@@ -15,7 +15,7 @@ export class DashboardProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.service.isLoading) {
+    if (this.service.isLoaded) {
       this.User = this.service.User
     }
   }

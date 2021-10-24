@@ -1,14 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ProductPagedResponce, StoreClientApi} from "../../shared/data/Client.Api";
-import {catchError, finalize, map} from "rxjs/operators";
+import {ProductPagedResponce, StoreClientApi} from "../data/Client.Api";
+import {catchError, map} from "rxjs/operators";
 import {throwError} from "rxjs";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AdminProductsService {
   // public dataSource!: MatTableDataSource<Product>;
-  public isLoaded!: boolean;
+  // public isLoaded!: boolean;
 
   constructor(
       private client: StoreClientApi
@@ -16,28 +14,20 @@ export class AdminProductsService {
   }
 
   public getProducts(pageNumber?: number, pageSize?: number, title?: string) {
-    this.isLoaded = false;
     return this.client
         .getProducts(pageNumber, pageSize, title)
         .pipe(
             map((data: ProductPagedResponce) => data),
-            catchError((error: any) => throwError(error)),
-            finalize(() => {
-              this.isLoaded = true
-            }))
-
-
+            catchError((error: any) => throwError(error))
+        )
   }
 
   public counter() {
-    this.isLoaded = false;
     return this.client
         .countProducts()
         .pipe(
             map((data) => data),
-            finalize(() => {
-              this.isLoaded = true
-            })
+            catchError((error: any) => throwError(error))
         )
   }
 }

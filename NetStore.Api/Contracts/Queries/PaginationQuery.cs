@@ -4,14 +4,13 @@
     {
         public PaginationQuery()
         {
-            // FirstPage = 1;
             PageNumber = 1;
-            PageSize = 24;
+            PageSize = 12;
         }
 
-        public PaginationQuery(int pagenumber, int pageSize)
+        public PaginationQuery(int pageNumber, int pageSize)
         {
-            PageNumber = pagenumber;
+            PageNumber = pageNumber;
             PageSize = pageSize;
         }
         public int PageNumber { get; set; }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HomeService} from "../home.service";
-import {productsDB} from "../../shared/data/products";
+import {ProductsService} from "../../shared/services/products.service";
+import {map} from "rxjs/operators";
+import {ProductPagedResponce} from "../../shared/data/Client.Api";
 
 // import { productsDB } from '../../shared/data/products';
 @Component({
@@ -9,16 +10,23 @@ import {productsDB} from "../../shared/data/products";
   styleUrls: ['./home-products.component.scss']
 })
 export class HomeProductsComponent implements OnInit {
-  products: any[] = [];
+  topProducts!: ProductPagedResponce;
+  public isLoaded!: boolean;
 
-  constructor(public service: HomeService) {
+  constructor(public service: ProductsService) {
 
   }
 
   ngOnInit(): void {
     // setTimeout(() => {
-    this.products = productsDB.Product;
-    this.service.getTopProducts();
+
+    this.service.getTopProducts()
+        .pipe(
+            map((data) => {
+              this.topProducts = data;
+            })
+        )
+        .subscribe();
     // this.service.isLoaded = true;
     // }, 8000);
   }

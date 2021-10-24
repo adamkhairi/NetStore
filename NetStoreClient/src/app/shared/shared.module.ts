@@ -23,6 +23,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -49,23 +50,18 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
+    MatPaginatorModule,
     MatTableModule,
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule,
+    MatSelectModule,
     HttpClientModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CardProductComponent,
     CommonModule,
     RouterModule,
     MatListModule,
@@ -76,17 +72,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
+    MatSelectModule,
     MatTableModule,
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    HttpClientModule,
+    CardProductComponent,
     LoaderComponent
 
   ]

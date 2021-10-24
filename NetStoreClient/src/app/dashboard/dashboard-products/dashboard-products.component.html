@@ -1,7 +1,7 @@
 <div>
-  <div class="filter flex items-center mb-5">
-    <h5>Products List</h5>
-    <div class="flex items-center ml-auto">
+  <div class="filter flex items-center justify-center mb-5">
+    <p class="text-2xl font-extrabold">Products List</p>
+    <div class="flex items-center  justify-center ml-auto">
       <button [class.text-accent]="view === 'grid'" (click)="view = 'grid'" mat-icon-button class="view__btn">
         <mat-icon>grid_view</mat-icon>
       </button>
@@ -11,16 +11,17 @@
     </div>
   </div>
 
+  <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
   <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
   </mat-form-field>
-  <div *ngIf="!service.isLoaded">
+  <div *ngIf="!isLoaded">
     <app-loader [show]="true" [center]="false"></app-loader>
   </div>
   <div>
-    <div class="mat-elevation-z2" *ngIf="dataSource && service.isLoaded">
-      <mat-table [dataSource]="dataSource" matSort>
+    <div class="mat-elevation-z2" *ngIf="dataSource" [ngClass]=" isLoaded==false ? 'hidden':''">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
         <!--        ID Column-->
         <ng-container matColumnDef="id" [sticky]="true">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
@@ -47,27 +48,59 @@
 
         <!--        Name Column -->
         <ng-container matColumnDef="price" [sticky]="true">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Price</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="price"> Price</th>
           <td mat-cell *matCellDef="let item"> {{item.price}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></tr>
-        <tr mat-row *matRowDef="let item; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let item; columns: displayedColumns;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedElement === item"
+            (click)="expandedElement = expandedElement === item ? null : item"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+            <div class="example-element-detail"
+                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div class="example-element-diagram">
+                <div class="example-element-position"> {{element.id}} </div>
+                <div class="example-element-symbol"> {{element.name}} </div>
+                <div class="example-element-name"> {{element.price}} </div>
+                <div class="example-element-weight"> {{element.color}} </div>
+              </div>
+              <div class="example-element-description">
+                {{element.longDescription}}
+                <span class="example-element-description-attribution"> -- </span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
 
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
         </tr>
-      </mat-table>
-    </div>
-    <mat-paginator
-           [length]="counter"
-           [pageSize]="pageSize"
+      </table>
+      <mat-paginator
+             [length]="counter"
+             [pageSize]="pageSize"
 
-           [pageSizeOptions]="[10, 25, 45,100]"
-           (page)="pageEvent = $event ;onPaginationChange($event)"
-           showFirstLastButtons
-           aria-label="Select page">
-    </mat-paginator>
+             [pageSizeOptions]="[10, 25, 45,100]"
+             (page)="pageEvent = $event ;onPaginationChange($event)"
+             showFirstLastButtons
+             aria-label="Select page">
+      </mat-paginator>
+    </div>
   </div>
 </div>
+<mat-drawer-container class="example-container container" [hasBackdrop]="true">
+  <mat-drawer #drawer mode="over">
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <h1>Hello</h1>
+  </mat-drawer-content>
+</mat-drawer-container>

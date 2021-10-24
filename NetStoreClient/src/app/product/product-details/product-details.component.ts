@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DetailService} from "./detail.service";
 import {ActivatedRoute} from "@angular/router";
+import {ProductsService} from "../../shared/services/products.service";
+import {map} from "rxjs/operators";
+import {ResponceProductDTO} from "../../shared/data/Client.Api";
 
 @Component({
   selector: 'app-product-details',
@@ -8,14 +10,22 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
+  productId!: string;
+  product: ResponceProductDTO | undefined;
 
-  constructor(public service: DetailService, private ar: ActivatedRoute) {
+  constructor(public service: ProductsService, private ar: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.ar.params.subscribe((params) => {
-      this.service.productId = params['id'];
-      this.service.getProduct();
+      this.productId = params['id'];
+      this.service.getProduct(this.productId)
+          .pipe(
+              map((data) => {
+                this.product = data
+              })
+          )
+          .subscribe();
     });
   }
 

@@ -1,4 +1,6 @@
-<app-loader [show]="true" [center]="true"></app-loader>
+<div *ngIf="!isLoaded">
+  <app-loader [show]="true" [center]="true"></app-loader>
+</div>
 <div class="ll-hero">
   <!--  <ng-particles [id]="'home_hero__particles'" class="ll-hero__particles" [options]="particlesOptions"></ng-particles>-->
   <ng-particles id="tsparticles" class="ll-hero__particles" [options]="particlesOptions"></ng-particles>

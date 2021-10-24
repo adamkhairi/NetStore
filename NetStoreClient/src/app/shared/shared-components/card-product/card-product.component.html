@@ -1,16 +1,23 @@
 <mat-card class="ll-product">
-  <img mat-card-image [src]="product?.imgUrl" alt="{{ product.name }}"
-       style="width: 100%; margin: 0 0 20px"/>
-  <mat-card-content class="flex">
-    <div class="flex-none w-10">
-      <!--              <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name"/>-->
+  <a [routerLink]="['/products', product.id]">
+    <div class="overflow-hidden img_div">
+      <img mat-card-image [src]="product?.imgUrl" alt="{{ product.name }}"
+           class="product__img"/>
+
     </div>
+  </a>
+  <mat-card-content class="flex">
+    <!--    <div class="flex-none w-10">-->
+    <!--      &lt;!&ndash;              <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name"/>&ndash;&gt;-->
+    <!--    </div>-->
     <div class="flex-grow pl-3">
       <h4 class="ll-product__creator text-gray-500">{{ product?.ref }}</h4>
       <h2 class="ll-product__name">
         <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
       </h2>
-      <h4 class="ll-product__creator">{{ product?.shortDescription }}</h4>
+      <div class=" overflow-hidden">
+        <h4 class="ll-product__creator ">{{ product?.shortDescription }}</h4>
+      </div>
       <div class="flex justify-between mt-5">
         <div class="ll-product__price-label">Prices:</div>
         <div class="ll-product__price text-accent font-bold">{{ product.price }} DH</div>

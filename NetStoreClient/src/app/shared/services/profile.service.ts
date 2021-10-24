@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {UserModel, UsersClientApi} from "../../shared/data/Client.Api";
-import {SharedFunctions} from "../../shared/data/shared-functions";
+import {UserModel, UsersClientApi} from "../data/Client.Api";
+import {SharedFunctions} from "../data/shared-functions";
 import {finalize} from "rxjs/operators";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {finalize} from "rxjs/operators";
 })
 export class ProfileService {
   public User !: UserModel;
-  public isLoading: boolean = false;
+  public isLoaded!: boolean;
 
   constructor(private client: UsersClientApi) {
   }
@@ -16,11 +16,11 @@ export class ProfileService {
   public getUserInfo() {
     const userId = SharedFunctions.UserId()
     if (userId == null) return;
-    this.isLoading = true
+    this.isLoaded = false
 
     this.client.getUser(userId)
         .pipe(finalize(() => {
-          this.isLoading = false
+          this.isLoaded = true
         }))
         .subscribe(data => {
           this.User = data;

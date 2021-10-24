@@ -60,6 +60,7 @@ namespace NetStore.Api.Services.Products
                 .Skip(skip)
                 .Take(paginationFilter.PageSize)
                 .ToListAsync();
+
             return result;
         }
 

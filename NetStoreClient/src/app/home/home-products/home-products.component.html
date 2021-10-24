@@ -4,8 +4,8 @@
       <h3 class="ll-section-head__heading">Our range:</h3>
       <h4 class="ll-section-head__subheading">Direct purchase & partly also as a subscription</h4>
     </div>
-    <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="service.topProductsList != null">
-      <div *ngFor="let product of service.topProductsList?.data?.slice(0,9)"
+    <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="topProducts != null">
+      <div *ngFor="let product of topProducts?.data?.slice(0,9)"
            class="col-span-12 md:col-span-6 xl:col-span-4">
         <app-card-product [product]="product"></app-card-product>
       </div>
@@ -13,11 +13,11 @@
     <div class="text-center mt-10">
       <a mat-raised-button color="accent" [routerLink]="['/products']" class="px-8 py-2 text-lg">Browse More</a>
     </div>
-    <div *ngIf="!service.isLoaded ">
+    <div *ngIf="!isLoaded ">
       <ngx-skeleton-loader
-        count="9"
-        appearance="circle"
-        [theme]="{
+             count="9"
+             appearance="circle"
+             [theme]="{
           'border-radius': '5px',
           height: '280px',
           width: 'calc(33% - 10px)'

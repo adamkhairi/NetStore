@@ -5,6 +5,10 @@
 
 export const menuList: Menu[] = [
   {
+    path: '',
+    name: 'Home'
+  },
+  {
     path: '/products',
     name: 'Products'
   },
