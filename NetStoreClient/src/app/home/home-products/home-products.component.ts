@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "../../shared/services/products.service";
-import {map} from "rxjs/operators";
+import {finalize, map} from "rxjs/operators";
 import {ProductPagedResponce} from "../../shared/data/Client.Api";
 
 // import { productsDB } from '../../shared/data/products';
@@ -19,11 +19,13 @@ export class HomeProductsComponent implements OnInit {
 
   ngOnInit(): void {
     // setTimeout(() => {
-
+    this.isLoaded = false
     this.service.getTopProducts()
         .pipe(
             map((data) => {
               this.topProducts = data;
+            }), finalize(() => {
+              this.isLoaded = true
             })
         )
         .subscribe();

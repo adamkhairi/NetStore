@@ -5,7 +5,12 @@
       "ProjectGuid": "4ce893a1-0bc9-46e3-bb62-068acd7093f9",
       "DisplayName": "NetStore.Api",
       "ColorIndex": 0
+    },
+    "2950d258-2980-4cb0-af72-4226c74ed96d": {
+      "ProjectGuid": "2950d258-2980-4cb0-af72-4226c74ed96d",
+      "DisplayName": "NetStore.Shared",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

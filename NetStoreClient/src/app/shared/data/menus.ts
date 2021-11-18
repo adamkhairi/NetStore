@@ -17,6 +17,10 @@ export const menuList: Menu[] = [
     name: 'About'
   },
   {
+    path: '/cart',
+    name: 'Cart'
+  },
+  {
     path: '/contact',
     name: 'Contact'
   }

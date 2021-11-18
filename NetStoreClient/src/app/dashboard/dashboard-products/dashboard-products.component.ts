@@ -22,15 +22,15 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class DashboardProductsComponent implements OnInit, AfterViewInit {
   view = 'list';
-  displayedColumns: string[] = ['id', 'name', 'shortDescription', 'color', 'price'];
+  displayedColumns: string[] = ['actions', 'id', 'name', 'shortDescription', 'color', 'price'];
   //TODO: FixPagination
   @ViewChild(MatPaginator) paginator!: MatPaginator | null;
   @ViewChild(MatSort) sort!: MatSort
   public dataSource!: MatTableDataSource<Product>;
-
-  pageIndex!: number;
+  public rowDetail!: Product
+  // pageIndex!: number;
   pageSize!: number;
-  lastPageIndex!: number;
+
   public isLoaded!: boolean;
   public counter: number | undefined;
   pageEvent!: PageEvent;
@@ -49,7 +49,7 @@ export class DashboardProductsComponent implements OnInit, AfterViewInit {
               console.log(this.counter);
             }),
             finalize(() => {
-              this.isLoaded = true
+              // this.isLoaded = true
             })
         )
         .subscribe();
@@ -60,9 +60,9 @@ export class DashboardProductsComponent implements OnInit, AfterViewInit {
               this.dataSource = new MatTableDataSource<Product>(data.data);
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort as MatSort;
-              this.pageSize = data.pageSize as number;
-              this.pageIndex = data.pageNumber as number;
-              console.log(this.pageIndex);
+              // this.pageSize = data.pageSize as number;
+              // this.pageIndex = data.pageNumber as number;
+              // console.log(this.pageIndex);
 
             }),
             finalize(() => {
@@ -94,7 +94,7 @@ export class DashboardProductsComponent implements OnInit, AfterViewInit {
             map((data) => {
               this.dataSource = new MatTableDataSource(data.data);
               this.pageSize = data.pageSize as number;
-              this.pageIndex = data.pageNumber as number;
+              // this.pageIndex = data.pageNumber as number;
               console.log(data)
             }),
             finalize(() => {
@@ -102,5 +102,10 @@ export class DashboardProductsComponent implements OnInit, AfterViewInit {
             })
         )
         .subscribe();
+  }
+
+  showDetails(item: any) {
+    if (item !== null) this.rowDetail = item;
+    console.log(item)
   }
 }

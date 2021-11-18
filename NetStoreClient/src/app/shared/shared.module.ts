@@ -36,6 +36,7 @@ import {MatSelectModule} from "@angular/material/select";
     LoaderComponent,
     CardProductComponent,
 
+
   ],
   imports: [
     FormsModule,
@@ -78,8 +79,14 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+
+    LayoutsComponent,
+    HeaderComponent,
+    SideNavComponent,
+    FooterComponent,
+    FeatureComponent,
+    LoaderComponent,
     CardProductComponent,
-    LoaderComponent
 
   ]
 })

@@ -1,4 +1,3 @@
-C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.GlobalUsings.g.cs
 C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.csproj.AssemblyReference.cache
 C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\fuzzy\source\repos\NetStore\NetStore.Shared\obj\Debug\net5.0\NetStore.Shared.AssemblyInfoInputs.cache

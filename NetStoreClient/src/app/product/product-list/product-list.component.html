@@ -80,7 +80,6 @@
     <!--    <div *ngIf="!isLoaded">-->
     <!--      <app-loader [show]="true" [center]="false"></app-loader>-->
     <!--    </div>-->
-    <div class="grid grid-cols-12 gap-6 xxl:gap-8 mb-2">
       <div *ngIf="!isLoaded ">
         <ngx-skeleton-loader
                count="9"
@@ -92,7 +91,9 @@
         }"
         ></ngx-skeleton-loader>
       </div>
-      <div *ngFor="let product of dataSource.data" class="col-span-6 md:col-span-4 xl:col-span-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div *ngFor="let product of dataSource.data"
+           class="w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
         <app-card-product [product]="product"></app-card-product>
       </div>
     </div>

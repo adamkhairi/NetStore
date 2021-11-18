@@ -4,9 +4,9 @@
       <h3 class="ll-section-head__heading">Our range:</h3>
       <h4 class="ll-section-head__subheading">Direct purchase & partly also as a subscription</h4>
     </div>
-    <div class="grid grid-cols-12 gap-6 xxl:gap-8" *ngIf="topProducts != null">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" *ngIf="topProducts != null">
       <div *ngFor="let product of topProducts?.data?.slice(0,9)"
-           class="col-span-12 md:col-span-6 xl:col-span-4">
+           class="w-full bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
         <app-card-product [product]="product"></app-card-product>
       </div>
     </div>

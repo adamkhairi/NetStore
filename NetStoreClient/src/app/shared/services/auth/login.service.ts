@@ -4,7 +4,7 @@ import {AuthClientApi, TokenRequestModel} from "../../data/Client.Api";
 import {FormBuilder, Validators} from "@angular/forms";
 import {SharedFunctions} from "../../data/shared-functions";
 import {NotificationService} from "../notification.service";
-import {finalize} from "rxjs/operators";
+import {finalize, map} from "rxjs/operators";
 
 @Injectable()
 export class LoginService {
@@ -34,9 +34,13 @@ export class LoginService {
     this.client.login(model)
         .pipe(finalize(() => {
               //TODO!! Show Responce.Message
-              // this.notification.error(this.error)
+              this.notification.error(this.error as string)
 
-            })
+            }),
+            map((response) => {
+              // this.notification.error(response as string)
+              return response
+            }),
         )
         .subscribe(async data => {
           // const token = (<any>data).token;
@@ -45,13 +49,9 @@ export class LoginService {
             await this.router.navigate(['/']);
             this.notification.success('Welcome Back !' + data.username);
           } else {
-            console.log(data.message);
+            console.log(data);
             this.error = data.message;
           }
-        }, error => {
-          this.error = error
-          // throwError(error);
-          this.invalidLogin = true;
         })
   }
 }

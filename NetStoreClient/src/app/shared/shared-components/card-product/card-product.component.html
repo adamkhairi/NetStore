@@ -1,36 +1,91 @@
-<mat-card class="ll-product">
-  <a [routerLink]="['/products', product.id]">
-    <div class="overflow-hidden img_div">
-      <img mat-card-image [src]="product?.imgUrl" alt="{{ product.name }}"
-           class="product__img"/>
+<!--<mat-card class="ll-product">-->
+<!--  <a [routerLink]="['/products', product.id]">-->
+<!--    <div class="overflow-hidden img_div">-->
+<!--      <img mat-card-image [src]="product?.imgUrl" alt="{{ product.name }}"-->
+<!--           class="product__img"/>-->
 
+<!--    </div>-->
+<!--  </a>-->
+<!--  <mat-card-content class="flex">-->
+<!--    <div class="flex-none w-10">-->
+<!--      &lt;!&ndash;              <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name"/>&ndash;&gt;-->
+<!--    </div>-->
+<div class="flex flex-col bg-gray-200 rounded-lg p-4 m-2">
+  <div class="h-40 bg-gray-400 rounded-lg" style="
+            background-image:{{product?.imgUrl}};
+            background-repeat: no-repeat;
+            background-attachment: cover;
+            background-position: center;"></div>
+  <div class="flex flex-col items-start mt-4">
+    <a [routerLink]="['/products', product.id]">
+      <h4 class="text-xl font-semibold">{{ product.name }}</h4>
+    </a>
+    <p class="text-sm">Some text about the thing that goes over a few lines.</p>
+    <button [routerLink]="['/products', product.id]"
+            class="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+      Add
+      to cart
+    </button>
+  </div>
+</div>
+
+<div class="card flex flex-col justify-center p-10 bg-white rounded-lg">
+  <div class="prod-title">
+    <a [routerLink]="['/products', product.id]"
+       class="text-2xl uppercase text-gray-900 font-bold">{{ product.name }}</a>
+    <p class="uppercase text-sm text-gray-400">
+      {{ product?.ref }}
+    </p>
+  </div>
+  <div class="prod-img">
+    <a [routerLink]="['/products', product.id]">
+      <img [src]="product?.imgUrl" alt="{{ product.name }}"
+           class="w-full object-cover object-center"/>
+    </a>
+  </div>
+  <div class="prod-info grid gap-10">
+    <div class=" overflow-hidden">
+      <h4 class="ll-product__creator ">{{ product?.shortDescription }}</h4>
     </div>
-  </a>
-  <mat-card-content class="flex">
-    <!--    <div class="flex-none w-10">-->
-    <!--      &lt;!&ndash;              <img src="{{ product?.created_by?.avatar }}" alt="product?.created_by?.name"/>&ndash;&gt;-->
-    <!--    </div>-->
-    <div class="flex-grow pl-3">
-      <h4 class="ll-product__creator text-gray-500">{{ product?.ref }}</h4>
-      <h2 class="ll-product__name">
-        <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
-      </h2>
-      <div class=" overflow-hidden">
-        <h4 class="ll-product__creator ">{{ product?.shortDescription }}</h4>
-      </div>
-      <div class="flex justify-between mt-5">
-        <div class="ll-product__price-label">Prices:</div>
-        <div class="ll-product__price text-accent font-bold">{{ product.price }} DH</div>
-      </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center text-gray-900">
+      <p class="font-bold text-xl">{{ product.price }} DH</p>
+      <button [routerLink]="['/products', product.id]"
+              class="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">
+        Add
+        to cart
+      </button>
     </div>
-  </mat-card-content>
-  <mat-card-actions class="ll-product__action flex justify-between">
-    <div class="flex-1 text-center flex items-center justify-center">
-      <mat-icon color="warn">star</mat-icon>
-      /5
-    </div>
-    <div class="flex-1 text-center">
-      <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Read More</a>
-    </div>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>
+<!--    <div class="flex-grow pl-3">-->
+<!--      <h4 class="ll-product__creator text-gray-500">{{ product?.ref }}</h4>-->
+<!--      <h2 class="ll-product__name">-->
+<!--        <a [routerLink]="['/products', product.id]">{{ product.name }}</a>-->
+<!--      </h2>-->
+<!--      <div class=" overflow-hidden">-->
+<!--        <h4 class="ll-product__creator ">{{ product?.shortDescription }}</h4>-->
+<!--      </div>-->
+<!--      <div class="flex justify-between mt-5">-->
+<!--        <div class="ll-product__price-label">Prices:</div>-->
+<!--        <div class="ll-product__price text-accent font-bold">{{ product.price }} DH</div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </mat-card-content>-->
+<!--  <mat-card-actions class="ll-product__action flex justify-between">-->
+
+<!--      <p class="font-bold text-xl">65 $</p>-->
+<!--      <button [routerLink]="['/products', product.id]"-->
+<!--              class="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">Add-->
+<!--        to cart</button>-->
+
+
+<!--&lt;!&ndash;    <div class="flex-1 text-center flex items-center justify-center">&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-icon color="warn">star</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;      /5&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="flex-1 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;      <a [routerLink]="['/products', product.id]" mat-raised-button color="warn" class="px-4">Read More</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  </mat-card-actions>-->
+<!--</mat-card>-->
