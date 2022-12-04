@@ -67,10 +67,15 @@ namespace NetStore.Api
 
 
             //!! Add DBContext ===>
-            services.AddDbContext<ApplicationDbContext>(option =>
-                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            );
+            //services.AddDbContext<ApplicationDbContext>(option =>
+            //    option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            //);
 
+            var sqlString = Configuration.GetConnectionString("SqlConnection");
+            //!! Add DBContext ===>
+            services.AddDbContext<ApplicationDbContext>(option =>
+                option.UseMySql(sqlString, ServerVersion.Parse("8.0.30"))
+            );
 
             //!! _ DependencyInjection _ ===>
             services.AddScoped<IAuthService, AuthService>();
