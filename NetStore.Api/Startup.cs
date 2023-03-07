@@ -66,16 +66,16 @@ namespace NetStore.Api
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-            //!! Add DBContext ===>
-            //services.AddDbContext<ApplicationDbContext>(option =>
-            //    option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            //);
-
-            var sqlString = Configuration.GetConnectionString("SqlConnection");
-            //!! Add DBContext ===>
+            // !! Add DBContext ===>
             services.AddDbContext<ApplicationDbContext>(option =>
-                option.UseMySql(sqlString, ServerVersion.Parse("8.0.30"))
+                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            // var sqlString = Configuration.GetConnectionString("SqlConnection");
+            // //!! Add DBContext ===>
+            // services.AddDbContext<ApplicationDbContext>(option =>
+            //     option.UseMySql(sqlString, ServerVersion.Parse("8.0.30"))
+            // );
 
             //!! _ DependencyInjection _ ===>
             services.AddScoped<IAuthService, AuthService>();
@@ -89,8 +89,8 @@ namespace NetStore.Api
             services.AddSingleton<IUriService>(provider =>
             {
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();
-                var request = accessor.HttpContext.Request;
-                var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
+                var request = accessor.HttpContext?.Request;
+                var absoluteUri = string.Concat(request?.Scheme, "://", request?.Host.ToUriComponent(), "/");
                 return new UriService(absoluteUri);
             });
 
@@ -125,7 +125,7 @@ namespace NetStore.Api
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "NetStore.Api", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetStore.Api", Version = "v1" });
                 var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlfile);
                 c.IncludeXmlComments(xmlPath);
